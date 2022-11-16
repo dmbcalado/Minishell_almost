@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ratinhosujo <ratinhosujo@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 00:03:02 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/15 14:52:29 by ratinhosujo      ###   ########.fr       */
+/*   Updated: 2022/11/16 23:15:56 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ char	*is_string_expandable(char *str, t_data *data);
 char	*realloc_string(char *ptr, char *str, int flag);
 char	**realloc_list(char **ptr, int len);
 char	**build_list(int len, char **ptr, char *str, t_data *data);
-char	**parse_line(t_data *data);
+void	parse_line(t_data *data);
 
 //ENVIRONMENT
 //parsing the env and extracting the paths
@@ -171,6 +171,7 @@ void	path_join(t_data *data, int index, int i_p);
 void	parse_cmds(t_data *data);
 void	parse_cmd(t_data *data, int index);
 int		acessing_cmd(t_data *data, int index);
+void	true_path(t_data *data, int index, int i, int count);
 
 //running commands
 void	run_processes(t_data *data, int index);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfreire <anfreire@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 01:04:26 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/15 13:39:45 by anfreire         ###   ########.fr       */
+/*   Updated: 2022/11/16 23:13:48 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,12 @@ int	get_cmd_i(t_data *data, int index)
 	while (data->par_line[++i])
 	{
 		if (cmd_detector (data, data->par_line[i]) == 1)
+		{
 			if (builtin_detector(data, data->par_line[i]) == -1)
 				count++;
+		}
+		else if (cmd_detector (data, data->par_line[i]) == 2)
+			count++;
 		if (count == index + 1)
 			break ;
 	}
@@ -65,6 +69,11 @@ void	parse_cmd(t_data *data, int index)
 	j = -1;
 	i = get_cmd_i(data, index);
 	count = count_cmd_args(data, i);
+	if (cmd_detector(data, data->par_line[i]) ==2)
+	{
+		true_path(data, index, i, count);
+		return ;
+	}
 	data->cmd.cmdx[index] = (char **)malloc((count + 2) * sizeof(char *));
 	data->cmd.cmdx[index][count + 1] = NULL;
 	while (++j <= count)
@@ -77,6 +86,49 @@ void	parse_cmd(t_data *data, int index)
 		k = -1;
 		while (data->par_line[i][++k])
 			data->cmd.cmdx[index][j][k] = data->par_line[i][k];
+		i++;
+	}
+}
+
+void	true_path(t_data *data, int index, int i, int count)
+{
+	int	j;
+	int	start;
+	int	len;
+
+	j = 0;
+	while (data->par_line[i][j])
+	{
+		if(data->par_line[i][j] == '/')
+		{
+			start = j;
+			len = 0;
+		}
+		j++;
+		len++;
+	}
+	data->cmd.cmdx[index] = (char **)malloc((count + 2) * sizeof(char *));
+	data->cmd.cmdx[index][count + 1] = NULL;
+	data->cmd.cmdx[index][0] = (char *)malloc(len + 1 * sizeof(char));
+	data->cmd.cmdx[index][len] = 0;
+	len = 0;
+	while (data->par_line[i][start])
+	{
+		data->cmd.cmdx[index][0][len] = data->par_line[i][start];
+		start++;
+		len++;
+	}
+	j = -1;
+	while (++j <= count)
+	{
+		len = 0;
+		while (data->par_line[i][len])
+			len++;
+		data->cmd.cmdx[index][j] = (char *)malloc((len + 1) * sizeof(char));
+		data->cmd.cmdx[index][j][len] = '\0';
+		len = -1;
+		while (data->par_line[i][++len])
+			data->cmd.cmdx[index][j][len] = data->par_line[i][len];
 		i++;
 	}
 }

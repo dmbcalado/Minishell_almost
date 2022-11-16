@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfreire <anfreire@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 16:30:44 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/13 15:03:50 by anfreire         ###   ########.fr       */
+/*   Updated: 2022/11/16 22:43:27 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	parse_pipe(char ***dbl_ptr, char *line, int args, t_data *data)
 	return (1);
 }
 
-char	**parse_line(t_data *data)
+void	parse_line(t_data *data)
 {
 	int		i;
 	int		args;
@@ -109,5 +109,5 @@ char	**parse_line(t_data *data)
 		else if (line[i] != ' ' && line[i] != '|')
 			i += parse_chars(&dbl_ptr, &line[i], args, data);
 	}
-	return (dbl_ptr);
+	data->par_line = dbl_ptr;
 }

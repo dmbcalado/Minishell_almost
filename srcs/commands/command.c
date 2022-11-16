@@ -19,7 +19,7 @@ void	run_command(t_data *data, int index, int cmd_i)
 		write(2, "Error on acessing the cmd\n", 27);
 		return ;
 	}
-	printf("index %d\n cmd_i %d\n", index, cmd_i);
+	printf("index %d\ncmd_nbr %d\n", index, data->cmd.cmd_nbr);
 	signal(SIGQUIT, back_slash);
 	signal(SIGINT, sig_handler);
 	data->ids.id[index] = fork();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_detect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ratinhosujo <ratinhosujo@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:54:28 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/15 16:55:22 by ratinhosujo      ###   ########.fr       */
+/*   Updated: 2022/11/16 23:16:34 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ int	cmd_detector(t_data *data, char *str)
 		else
 			free(data->paths.test_cmd);
 	}
+	if (access(str, X_OK) == 0 && \
+		!is_dot_cmd(str))
+		return(2);
 	return (0);
 }
 

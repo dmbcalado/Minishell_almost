@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ratinhosujo <ratinhosujo@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 06:49:28 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/15 16:55:50 by ratinhosujo      ###   ########.fr       */
+/*   Updated: 2022/11/16 22:42:40 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,10 @@ int	walk_till_executable(t_data *data, int i)
 			data->paths.p_str != NULL)
 				break ;
 			else if (redir_detector(data, data->par_line[i]) == 1)
-			{
-				flag = 1;
-				break ;
-			}
+				flag++;
 		}
 	}
-	if (flag == 1)
+	if (flag > 1)
 	{
 		write(2, "command not found\n", 18);
 		return (-2);
@@ -87,33 +84,38 @@ void	close_files(t_data *data)
 {
 	int	i;
 	int	size;
-	
-	i = -1;
+
+ 	i = -1;
 	size = data->cmd.cmd_nbr + data->built.builtin_n;
 	while (++i < size)
-	{
-		if (data->ids.inp_list[i] != STDIN_FILENO)
-			close(data->ids.inp_list[i]);
-		if (data->ids.outp_list[i] != STDOUT_FILENO)
-			close(data->ids.outp_list[i]);
-		close(data->ids.pfd[i][0]);
 		close(data->ids.pfd[i][1]);
-	}
+	i = -1;
+	while (++i < size)
+		close(data->ids.pfd[i][0]);
 	i = -1;
 	while (++i < size)
 		waitpid(data->ids.id[i], &g_exit, 0);
 	WEXITSTATUS(g_exit);
 	if (g_exit == 2)
-			g_exit = 130;
+		g_exit = 130;
 	else if (g_exit == 131)
-			g_exit = 131;
+		g_exit = 131;
 	else
 		g_exit /= 256;
 }
 
+void	starting_vars(t_data *data)
+{
+	data->andre.args = 0;
+	data->cmd.c_counter = 0;
+	data->built.b_counter = 0;
+	data->redir.r_counter = 0;
+	data->redir.father_flag = 0;
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
-	t_data data;
+	t_data	data;
 
 	if (argc < 1 || *argv == NULL)
 		return (0);
@@ -122,12 +124,8 @@ int	main(int argc, char *argv[], char *envp[])
 	while (1)
 	{
 		get_line(&data);
-		data.andre.args = 0;
-		data.cmd.c_counter = 0;
-		data.built.b_counter = 0;
-		data.redir.r_counter = 0;
-		data.redir.father_flag = 0;
-		data.par_line = parse_line(&data);
+		starting_vars(&data);
+		parse_line(&data);
 		get_paths(&data);
 		if (data.paths.p_str != NULL)
 		{
