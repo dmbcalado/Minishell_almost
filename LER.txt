@@ -1,0 +1,9 @@
+Falta:
+
+ls | echo bola | wc nao ter leaks
+
+ls | grep h | wc nao fulciona, se o 3o cmd depende do 2o e o 2o do 1o tamos fdds
+
+true paths
+
+command not found -> aprefeicoar
