@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ratinhosujo <ratinhosujo@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 01:04:26 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/16 23:13:48 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/17 05:22:53 by ratinhosujo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ void	parse_cmd(t_data *data, int index)
 	j = -1;
 	i = get_cmd_i(data, index);
 	count = count_cmd_args(data, i);
-	if (cmd_detector(data, data->par_line[i]) ==2)
+	if (cmd_detector(data, data->par_line[i]) == 2)
 	{
+		printf("entra no true path\n");
 		true_path(data, index, i, count);
 		return ;
 	}
@@ -101,7 +102,7 @@ void	true_path(t_data *data, int index, int i, int count)
 	{
 		if(data->par_line[i][j] == '/')
 		{
-			start = j;
+			start = j + 1;
 			len = 0;
 		}
 		j++;
@@ -109,8 +110,8 @@ void	true_path(t_data *data, int index, int i, int count)
 	}
 	data->cmd.cmdx[index] = (char **)malloc((count + 2) * sizeof(char *));
 	data->cmd.cmdx[index][count + 1] = NULL;
-	data->cmd.cmdx[index][0] = (char *)malloc(len + 1 * sizeof(char));
-	data->cmd.cmdx[index][len] = 0;
+	data->cmd.cmdx[index][0] = (char *)malloc((len) * sizeof(char));
+	data->cmd.cmdx[index][0][len - 1] = 0;
 	len = 0;
 	while (data->par_line[i][start])
 	{
@@ -118,18 +119,19 @@ void	true_path(t_data *data, int index, int i, int count)
 		start++;
 		len++;
 	}
-	j = -1;
-	while (++j <= count)
+	printf("%s\n", data->cmd.cmdx[index][0]);
+	j = 0;
+	while (++j < count)
 	{
+		i++;
 		len = 0;
-		while (data->par_line[i][len])
+		while (data->par_line[i] && data->par_line[i][len])
 			len++;
 		data->cmd.cmdx[index][j] = (char *)malloc((len + 1) * sizeof(char));
 		data->cmd.cmdx[index][j][len] = '\0';
 		len = -1;
-		while (data->par_line[i][++len])
+		while (data->par_line[i] && data->par_line[i][++len])
 			data->cmd.cmdx[index][j][len] = data->par_line[i][len];
-		i++;
 	}
 }
 
@@ -156,23 +158,43 @@ void	parse_cmds(t_data *data)
 // Function tests if theres the command executable file in the paths of my env.
 // -----------------------------------------------------------------------------
 
-int	acessing_cmd(t_data *data, int index)
+int	acessing_cmd(t_data *data, int index, int i)
 {
-	int	i;
+	int	j;
 	int	c;
 
-	i = -1;
+	j = -1;
 	c = 0;
 	while (data->paths.paths[c])
 		c++;
-	while (++i < c)
+	while (++j < c)
 	{
-		path_join (data, index, i);
+		path_join (data, index, j);
 		if (access(data->paths.path_cmd[index], X_OK) == 0 && \
 		!is_dot_cmd(data->paths.path_cmd[index]))
 			return (1);
 		else
 			free (data->paths.path_cmd[index]);
 	}
+	if (true_path_join(data, index, i) == 1)
+		return (1);
+	return (0);
+}
+
+int	true_path_join(t_data *data, int index, int i)
+{
+	int	j;
+
+	j = 1;
+	while(data->par_line[i][j])
+		j++;
+	data->paths.path_cmd[index] = (char *)malloc(j * sizeof(char));
+	j = -1;
+	while (data->par_line[i][++j])
+		data->paths.path_cmd[index][j] = data->par_line[i][j];
+	data->paths.path_cmd[index][i] = '\0';
+	if (access(data->paths.path_cmd[index], X_OK) == 0 && \
+		!is_dot_cmd(data->paths.path_cmd[index]))
+		return (1);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ratinhosujo <ratinhosujo@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 06:49:28 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/16 22:42:40 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/17 05:18:30 by ratinhosujo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ void	brain(t_data *data)
 			exec_builtin(data, data->redir.r_counter, i);
 			data->built.b_counter++;
 		}
-		else if (cmd_detector(data, data->par_line[i]) == 1 && \
+		else if (cmd_detector(data, data->par_line[i]) > 0 && \
 		data->paths.p_str != NULL)
 		{
 			printf("cmd %s\n", data->cmd.cmdx[data->cmd.c_counter][0]);
-			run_command(data, data->redir.r_counter, data->cmd.c_counter);
+			run_command(data, data->redir.r_counter, data->cmd.c_counter, i);
 			data->cmd.c_counter++;
 			data->redir.r_counter++;
 		}

@@ -46,18 +46,18 @@ void	count_line(t_data *data)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	data->cmd.cmd_nbr = 0;
 	data->redir.input_n = 0;
 	data->redir.output_n = 0;
 	data->redir.append_n = 0;
 	data->redir.heredoc_n = 0;
 	data->built.builtin_n = 0;
-	while (data->par_line[i])
+	while (data->par_line[++i])
 	{
 		if (builtin_detector (data, data->par_line[i]) >= 0)
 			data->built.builtin_n++;
-		else if (cmd_detector (data, data->par_line[i]) == 1)
+		else if (cmd_detector (data, data->par_line[i]) > 0)
 			data->cmd.cmd_nbr++;
 		else if (redir_detector (data, data->par_line[i]) > 1)
 		{
@@ -70,7 +70,6 @@ void	count_line(t_data *data)
 			if (redir_detector (data, data->par_line[i]) == 5)
 				data->redir.append_n++;
 		}
-		i++;
 	}
 }
 

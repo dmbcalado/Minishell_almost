@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ratinhosujo <ratinhosujo@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 00:03:02 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/16 23:15:56 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/17 05:19:48 by ratinhosujo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,17 +165,18 @@ int		compare(const char *s1, const char *s2);
 int		p_size(t_data *data, char *str, int i_p);
 int		path_size(t_data *data, int index, int i_p);
 void	path_join(t_data *data, int index, int i_p);
+int		true_path_join(t_data *data, int index, int i);
 
 //COMMANDS
 //parsing and testing if its executable
 void	parse_cmds(t_data *data);
 void	parse_cmd(t_data *data, int index);
-int		acessing_cmd(t_data *data, int index);
+int		acessing_cmd(t_data *data, int index, int i);
 void	true_path(t_data *data, int index, int i, int count);
 
 //running commands
 void	run_processes(t_data *data, int index);
-void	run_command(t_data *data, int index, int cmd_i);
+void	run_command(t_data *data, int index, int cmd_i, int i);
 void	run_father(t_data *data, int index);
 void	run_one_father(t_data *data);
 void	run_child(t_data *data, int index);
