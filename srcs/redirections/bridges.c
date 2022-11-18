@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:20:36 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/18 20:12:06 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:58:54 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ int	bridge_infiles(t_data *data, int index)
 	int	count;
 
 	i = -1;
+	ret = 0;
 	while (++count <= index)
 	{
 		while (data->par_line[++i])
 		{
-			ret = bridging_infiles(data, index, i, count);
-			if (ret > 0)
-				continue ;
+			if (count == index)
+				ret = bridging_infiles(data, i);
+			if (ret == -2)
+				break ;
 			else if (ret == -1)
 				return (-1);
 		}
@@ -33,16 +35,16 @@ int	bridge_infiles(t_data *data, int index)
 	return (1);
 }
 
-int	bridging_infiles(t_data *data, int index, int i, int count)
+int	bridging_infiles(t_data *data, int i)
 {
 	int	ret;
 
 	ret = redir_detector (data, data->par_line[i]);
 	if (ret == 1)
-		return (i++);
+		return (-2);
 	if (ret > 1)
 	{
-		if (ret < 4 && i != data->redir.last && count == index)
+		if (ret < 3 && i != data->redir.last)
 		{
 			if (open(data->par_line[i + 1], O_RDONLY) < 0)
 			{
@@ -67,7 +69,8 @@ int	bridge_outfiles(t_data *data, int index)
 	{
 		while (data->par_line[++i])
 		{
-			ret = bridging_outfiles(data, index, i, count);
+			if (count == index)
+				ret = bridging_outfiles(data, i);
 			if (ret == 0)
 				break ;
 			else if (ret == -1)
@@ -77,11 +80,10 @@ int	bridge_outfiles(t_data *data, int index)
 	return (1);
 }
 
-int	bridging_outfiles(t_data *data, int index, int i, int count)
+int	bridging_outfiles(t_data *data, int i)
 {
 	int	ret;
 
-	i = -1; 
 	while (data->par_line[i])
 	{
 		ret = redir_detector (data, data->par_line[i]);
@@ -89,7 +91,7 @@ int	bridging_outfiles(t_data *data, int index, int i, int count)
 			return (0);
 		if (ret > 1)
 		{
-			if (ret > 3 && i != data->redir.last && count == index)
+			if (ret > 3 && i != data->redir.last)
 			{
 				printf("%d entrou para dar bridge a %s\n", i, data->par_line[i + 1]);
 				if (open(data->par_line[i + 1], O_CREAT | O_RDWR | O_TRUNC, 777) < 0)

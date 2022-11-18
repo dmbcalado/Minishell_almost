@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 00:03:02 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/18 20:11:36 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:58:43 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,8 +242,8 @@ void	extract_input(t_data *data, int index, int i);
 void	extract_output(t_data *data, int index, int i);
 int		bridge_infiles(t_data *data, int index);
 int		bridge_outfiles(t_data *data, int index);
-int		bridging_infiles(t_data *data, int index, int i, int count);
-int		bridging_outfiles(t_data *data, int index, int last, int count);
+int		bridging_infiles(t_data *data, int i);
+int		bridging_outfiles(t_data *data, int i);
 
 // heredoc
 void	heredoc(t_data *data, int index);

@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 02:13:18 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/18 18:56:30 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:35:52 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	find_i_for_infile(t_data *data, int index)
 			}
 		}
 	}
+	data->redir.last = save;
 	return (save);
 }
 
@@ -81,6 +82,6 @@ int	find_i_for_outfile(t_data *data, int index)
 			}
 		}
 	}
-	printf("last : %s\n",data->par_line[i]);
+	data->redir.last = save;
 	return (save);
 }

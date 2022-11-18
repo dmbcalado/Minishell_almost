@@ -12,12 +12,53 @@
 
 #include "../../header.h"
 
-//------------------------------------------------------------------------------
-// args: i as par_line[i]
-// index has in wich cmd index, flag has flag = 1 : </>
-//										flag = 2 : <</>>
-// task: sets all counters to zero,
-//------------------------------------------------------------------------------
+int	redirect_input(t_data *data, int index)
+{
+	int	i;
+	int	ret;
+
+	i = find_i_for_infile(data, index);
+	printf("last : %d\n", i);
+	ret = redir_detector(data, data->par_line[i]);
+	if (bridge_infiles(data, index) < 0)
+		return (-1);
+	if (ret == 2)
+	{
+		extract_input(data, index, i + 1);
+		if (exec_in_redirect(data, index, 2) < 0)
+			return (-1);
+	}
+	else
+	{
+		extract_hdockey(data, i + 1);
+		heredoc(data, index);
+	}
+	return (i);
+}
+
+int	redirect_output(t_data *data, int index)
+{
+	int	i;
+	int	ret;
+
+	i = find_i_for_outfile(data, index);
+	printf("outfile: %s\n", data->par_line[i]);
+	ret = redir_detector (data, data->par_line[i]);
+	if (bridge_outfiles(data, index) < 0)
+		return (-1);
+	extract_output(data, index, i + 1);
+	if (ret == 4)
+	{
+		if (exec_out_redirect(data, index, 4) < 0)
+			return (-1);
+	}
+	else
+	{
+		if (exec_out_redirect(data, index, 5) < 0)
+			return (-1);
+	}
+	return (i);
+}
 
 int	redirect(t_data *data)
 {
@@ -38,7 +79,6 @@ int	redirect(t_data *data)
 		while (data->par_line[i])
 		{
 			ret = redir_detector (data, data->par_line[i]);
-			printf("ret %d\n", ret);
 			if (ret == 1)
 			{
 				i++;
@@ -118,51 +158,4 @@ int	exec_out_redirect(t_data *data, int index, int save)
 		}
 	}
 	return (1);
-}
-
-int	redirect_input(t_data *data, int index)
-{
-	int	i;
-	int	ret;
-
-	data->redir.last = find_i_for_infile(data, index);
-	ret = redir_detector (data, data->par_line[data->redir.last]);
-	if (bridge_infiles(data, index) < 0)
-		return (-1);
-	if (ret == 2)
-	{
-		extract_input(data, index, i + 1);
-		if (exec_in_redirect(data, index, 2) < 0)
-			return (-1);
-	}
-	else
-	{
-		extract_hdockey(data, i + 1);
-		heredoc(data, index);
-	}
-	return (i);
-}
-
-int	redirect_output(t_data *data, int index)
-{
-	int	i;
-	int	ret;
-
-	i = find_i_for_outfile(data, index);
-	printf("outfile: %s\n", data->par_line[i]);
-	ret = redir_detector (data, data->par_line[i]);
-	if (bridge_outfiles(data, index) < 0)
-		return (-1);
-	extract_output(data, index, i + 1);
-	if (ret == 4)
-	{
-		if (exec_out_redirect(data, index, 4) < 0)
-			return (-1);
-	}
-	else
-	{
-		if (exec_out_redirect(data, index, 5) < 0)
-			return (-1);
-	}
-	return (i);
 }
