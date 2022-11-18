@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ratinhosujo <ratinhosujo@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 00:03:02 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/17 05:19:48 by ratinhosujo      ###   ########.fr       */
+/*   Updated: 2022/11/18 20:11:36 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_built
 
 typedef struct s_redir
 {
+	int		last;
 	int		r_counter;
 	int		input_n;
 	int		output_n;
@@ -231,16 +232,18 @@ void	redirecting_output(t_data *data, int index);
 void	piping_first(t_data *data, int index);
 void	piping_last(t_data *data, int index);
 int		walk_till_pipe(t_data *data, int i);
-
-
+int		redirect_input(t_data *data, int index);
+int		redirect_output(t_data *data, int index);
 
 // input and output
 int		find_i_for_infile(t_data *data, int index);
 int		find_i_for_outfile(t_data *data, int index);
 void	extract_input(t_data *data, int index, int i);
 void	extract_output(t_data *data, int index, int i);
-int		bridge_infiles(t_data *data, int index, int last);
-int		bridge_outfiles(t_data *data, int index, int last);
+int		bridge_infiles(t_data *data, int index);
+int		bridge_outfiles(t_data *data, int index);
+int		bridging_infiles(t_data *data, int index, int i, int count);
+int		bridging_outfiles(t_data *data, int index, int last, int count);
 
 // heredoc
 void	heredoc(t_data *data, int index);
@@ -252,10 +255,9 @@ int		redirect(t_data *data);
 int		exec_in_redirect(t_data *data, int index, int save);
 int		exec_out_redirect(t_data *data, int index, int save);
 
-
 //SIGNALS
-void    sig_handler_one(int signum);
-void    sig_handler(int signum);
+void	sig_handler_one(int signum);
+void	sig_handler(int signum);
 void	exit_shell_sig(int sig);
 void	back_slash(int sig);
 void	exit_shell(t_data *data);

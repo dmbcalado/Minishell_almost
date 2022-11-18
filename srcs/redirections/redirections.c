@@ -21,11 +21,11 @@
 
 int	redirect(t_data *data)
 {
-	int	index;
-	int	size;
 	int	i;
 	int	flag_i;
 	int	flag_o;
+	int	index;
+	int	size;
 	int	ret;
 
 	i = 0;
@@ -38,6 +38,7 @@ int	redirect(t_data *data)
 		while (data->par_line[i])
 		{
 			ret = redir_detector (data, data->par_line[i]);
+			printf("ret %d\n", ret);
 			if (ret == 1)
 			{
 				i++;
@@ -47,38 +48,19 @@ int	redirect(t_data *data)
 			{
 				if (ret < 4 && flag_i == 0)
 				{
-					if (bridge_infiles(data, index, i) < 0)
+					i = redirect_input(data, index);
+					if (i < 0)
 						return (-1);
-					if (ret == 2)
-					{
-						extract_input(data, index, i + 1);
-						if (exec_in_redirect(data, index, 2) < 0)
-							return (-1);
-					}
 					else
-					{
-						extract_hdockey(data, i + 1);
-						heredoc(data, index);
-					}
-					flag_i++;
+						flag_i = 1;
 				}
 				if (ret > 3 && flag_o == 0)
 				{
-					i = find_i_for_outfile(data, index);
-					if (bridge_outfiles(data, index, i) < 0)
+					i = redirect_output(data, index);
+					if (i < 0)
 						return (-1);
-					extract_output(data, index, i + 1);
-					if (ret == 4)
-					{
-						if (exec_out_redirect(data, index, 4) < 0)
-							return (-1);
-					}
 					else
-					{
-						if (exec_out_redirect(data, index, 5) < 0)
-							return (-1);
-					}
-					flag_o++;
+						flag_o = 1;
 				}
 			}
 			i++;
@@ -136,4 +118,51 @@ int	exec_out_redirect(t_data *data, int index, int save)
 		}
 	}
 	return (1);
+}
+
+int	redirect_input(t_data *data, int index)
+{
+	int	i;
+	int	ret;
+
+	data->redir.last = find_i_for_infile(data, index);
+	ret = redir_detector (data, data->par_line[data->redir.last]);
+	if (bridge_infiles(data, index) < 0)
+		return (-1);
+	if (ret == 2)
+	{
+		extract_input(data, index, i + 1);
+		if (exec_in_redirect(data, index, 2) < 0)
+			return (-1);
+	}
+	else
+	{
+		extract_hdockey(data, i + 1);
+		heredoc(data, index);
+	}
+	return (i);
+}
+
+int	redirect_output(t_data *data, int index)
+{
+	int	i;
+	int	ret;
+
+	i = find_i_for_outfile(data, index);
+	printf("outfile: %s\n", data->par_line[i]);
+	ret = redir_detector (data, data->par_line[i]);
+	if (bridge_outfiles(data, index) < 0)
+		return (-1);
+	extract_output(data, index, i + 1);
+	if (ret == 4)
+	{
+		if (exec_out_redirect(data, index, 4) < 0)
+			return (-1);
+	}
+	else
+	{
+		if (exec_out_redirect(data, index, 5) < 0)
+			return (-1);
+	}
+	return (i);
 }

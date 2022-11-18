@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 02:13:18 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/14 17:26:04 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/18 18:56:30 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ int	find_i_for_outfile(t_data *data, int index)
 		{
 			if (redir_detector(data, data->par_line[i]) > 1)
 			{
-				if (redir_detector(data, data->par_line[i]) >= 4)
+				if (redir_detector(data, data->par_line[i]) > 3)
 					save = i;
 			}
 		}
 	}
+	printf("last : %s\n",data->par_line[i]);
 	return (save);
 }

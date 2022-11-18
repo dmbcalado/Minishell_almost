@@ -1,6 +1,8 @@
 Falta:
 
-TUDO A FULCIONAR
+ls | echo bolas | wc > outfile.txt >> outfile.txt | grep h < infile.txt
+
+ls | wc > outfile.txt >> outfile.txt < infile.txt
 
 true paths -> com mais argumentos ainda falha
 

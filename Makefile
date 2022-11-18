@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anfreire <anfreire@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 20:21:37 by anfreire          #+#    #+#              #
-#    Updated: 2022/11/15 12:58:41 by anfreire         ###   ########.fr        #
+#    Updated: 2022/11/18 19:27:49 by dmendonc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,28 +31,28 @@ $(NAME)	:	$(OBJS)
 		@echo	""
 		@echo	""
 		@echo	""
-		@echo -e "\e[34m           :::   :::   ::::::::::: ::::    ::: ::::::::::: ::::::::  :::    ::: :::::::::: :::        :::	"
-		@echo -e "         :+:+: :+:+:      :+:     :+:+:   :+:     :+:    :+:    :+: :+:    :+: :+:        :+:        :+:  "
-		@echo -e "       +:+ +:+:+ +:+     +:+     :+:+:+  +:+     +:+    +:+        +:+    +:+ +:+        +:+        +:+   "
-		@echo -e "      +#+  +:+  +#+     +#+     +#+ +:+ +#+     +#+    +#++:++#++ +#++:++#++ +#++:++#   +#+        +#+    "
-		@echo -e "     +#+       +#+     +#+     +#+  +#+#+#     +#+           +#+ +#+    +#+ +#+        +#+        +#+     "
-		@echo -e "    #+#       #+#     #+#     #+#   #+#+#     #+#    #+#    #+# #+#    #+# #+#        #+#        #+#      "
-		@echo -e "   ###       ### ########### ###    #### ########### ########  ###    ### ########## ########## ##########"
-		@echo -e ""
-		@echo -e "\e[32mVersion : 0.0.1"
-		@echo -e ""
-		@echo -e "\e[0mThis replication of the bash shell runs commands, redirections and has some builtin commands."
-		@echo -e "You're able to fully check the objectives on this project by checking the file subject.pdf."
-		@echo -e "So we hope you enjoy going through this software half as much as we enjoyed making it for you,"
-		@echo -e "because we had a ball."
-		@echo -e ""
-		@echo -e "\e[34mnow run ./minishell and welcome!"
-		@echo -e ""
-		@echo -e "\e[0mWork made by:"
-		@echo -e "Diogo MBM Calado and Andre Freire, from 42 Lisbon."
-		@echo -e ""
-		@echo -e ""
-		@echo -e ""
+		@echo  "\e[34m           :::   :::   ::::::::::: ::::    ::: ::::::::::: ::::::::  :::    ::: :::::::::: :::        :::	"
+		@echo  "         :+:+: :+:+:      :+:     :+:+:   :+:     :+:    :+:    :+: :+:    :+: :+:        :+:        :+:  "
+		@echo  "       +:+ +:+:+ +:+     +:+     :+:+:+  +:+     +:+    +:+        +:+    +:+ +:+        +:+        +:+   "
+		@echo  "      +#+  +:+  +#+     +#+     +#+ +:+ +#+     +#+    +#++:++#++ +#++:++#++ +#++:++#   +#+        +#+    "
+		@echo  "     +#+       +#+     +#+     +#+  +#+#+#     +#+           +#+ +#+    +#+ +#+        +#+        +#+     "
+		@echo  "    #+#       #+#     #+#     #+#   #+#+#     #+#    #+#    #+# #+#    #+# #+#        #+#        #+#      "
+		@echo  "   ###       ### ########### ###    #### ########### ########  ###    ### ########## ########## ##########"
+		@echo  ""
+		@echo  "\e[32mVersion : 0.0.1"
+		@echo  ""
+		@echo  "\e[0mThis replication of the bash shell runs commands, redirections and has some builtin commands."
+		@echo  "You're able to fully check the objectives on this project by checking the file subject.pdf."
+		@echo  "So we hope you enjoy going through this software half as much as we enjoyed making it for you,"
+		@echo  "because we had a ball."
+		@echo  ""
+		@echo  "\e[34mnow run ./minishell and welcome!"
+		@echo  ""
+		@echo  "\e[0mWork made by:"
+		@echo  "Diogo MBM Calado and Andre Freire, from 42 Lisbon."
+		@echo  ""
+		@echo  ""
+		@echo  ""
 		
 %.o	:	%.c
 	@gcc $(CFLAGS) -c $^ -I./ -o $@

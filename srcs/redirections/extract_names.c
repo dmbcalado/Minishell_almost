@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 21:02:23 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/13 03:42:41 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/18 18:53:42 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	extract_input(t_data *data, int index, int i)
 	j = -1;
 	while (data->par_line[i][++j])
 		data->redir.input[index][j] = data->par_line[i][j];
+	printf("data->redir.input[%d] %s\n", index, data->redir.input[index]);
 }
 
 void	extract_hdockey(t_data *data, int i)
@@ -39,6 +40,7 @@ void	extract_hdockey(t_data *data, int i)
 	j = -1;
 	while (data->par_line[i][++j])
 		data->redir.hdoc_key[j] = data->par_line[i][j];
+	printf("data->redir.hdoc = %s\n", data->redir.hdoc_key);
 }
 
 void	extract_output(t_data *data, int index, int i)
@@ -54,4 +56,5 @@ void	extract_output(t_data *data, int index, int i)
 	j = -1;
 	while (data->par_line[i][++j])
 		data->redir.output[index][j] = data->par_line[i][j];
+	printf("data->redir.output[%d] = %s\n", index, data->redir.output[index]);
 }
