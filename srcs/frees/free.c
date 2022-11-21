@@ -97,9 +97,10 @@ void	free_for_builtins(t_data *data)
 	int	i;
 
 	i = -1;
-	while(data->envp[++i])
+	while (data->envp[++i])
 		free(data->envp[i]);
-	free(data->envp[i]);
 	free(data->envp);
 	free(data->ids.id);
+	if (data->redir.hdoc_key != NULL)
+		free(data->redir.hdoc_key);
 }

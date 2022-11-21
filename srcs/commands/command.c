@@ -27,7 +27,6 @@ void	pipe_child(t_data *data, int index)
 
 void	run_command(t_data *data, int index, int cmd_i, int i)
 {
-	printf("index %d\n", index);
 	if (acessing_cmd(data, cmd_i, i) != 1)
 	{
 		write(2, "Error on acessing the cmd\n", 27);

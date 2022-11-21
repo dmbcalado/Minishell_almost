@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:20:36 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/21 18:40:10 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:47:46 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	bridge_infiles(t_data *data, int index)
 	i = -1;
 	ret = 0;
 	count = -1;
-	printf("canoa?\n");
 	while (++count <= index)
 	{
 		while (data->par_line[++i] != NULL)
@@ -45,15 +44,14 @@ int	bridging_infiles(t_data *data, int index, int count, int i)
 		return (-2);
 	if (ret > 1 && count == index)
 	{
-		printf("ret %d\n", ret);
 		if (ret == 2 && i != data->redir.last)
 		{
 			if (open(data->par_line[i + 1], O_RDONLY) < 0)
 			{
-				printf("Error: the file %s does not exist.", data->par_line[i + 1]);
+				printf("Error: the file %s does not exist."\
+				, data->par_line[i + 1]);
 				return (-1);
 			}
-			printf("bridged : %s\n",data->par_line[i + 1]);
 		}
 		else if (ret == 3 && i != data->redir.last)
 		{
@@ -100,8 +98,8 @@ int	bridging_outfiles(t_data *data, int i)
 		{
 			if (ret > 3 && i != data->redir.last)
 			{
-				printf("%d entrou para dar bridge a %s\n", i, data->par_line[i + 1]);
-				if (open(data->par_line[i + 1], O_CREAT | O_RDWR | O_TRUNC, 777) < 0)
+				if (open(data->par_line[i + 1], O_CREAT | O_RDWR \
+				| O_TRUNC, 777) < 0)
 					return (-1);
 			}
 		}

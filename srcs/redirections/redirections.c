@@ -18,7 +18,6 @@ int	redirect_input(t_data *data, int index)
 	int	ret;
 
 	i = find_i_for_infile(data, index);
-	printf("last : %d\n", i);
 	ret = redir_detector(data, data->par_line[i]);
 	if (bridge_infiles(data, index) < 0)
 		return (-1);

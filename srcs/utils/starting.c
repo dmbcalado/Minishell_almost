@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   starting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfreire <anfreire@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 15:54:26 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/15 13:15:16 by anfreire         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:28:56 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	starting(t_data *data, char *envp[])
 	get_envp (data, envp);
 	data->line = NULL;
 	g_exit = 0;
+	data->redir.hdoc_key = NULL;
 }

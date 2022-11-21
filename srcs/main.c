@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 06:49:28 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/21 16:32:21 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:48:58 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	brain(t_data *data)
 		else if (cmd_detector(data, data->par_line[i]) > 0 && \
 		data->paths.p_str != NULL)
 		{
-			printf("cmd %s\n", data->cmd.cmdx[data->cmd.c_counter][0]);
 			run_command(data, data->redir.r_counter, data->cmd.c_counter, i);
 			data->cmd.c_counter++;
 			data->redir.r_counter++;
@@ -117,7 +116,6 @@ int	main(int argc, char *argv[], char *envp[])
 
 	if (argc < 1 || *argv == NULL)
 		return (0);
-	get_envp (&data, envp);
 	starting(&data, envp);
 	while (1)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ratinhosujo <ratinhosujo@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 21:53:19 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/15 15:44:25 by ratinhosujo      ###   ########.fr       */
+/*   Updated: 2022/11/21 19:33:06 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,31 @@ static int	return_exit(char *str)
 
 void	exit_minishell(t_data *data)
 {
+	int	ret;
 	int	args;
 
 	args = 0;
+	ret = 0;
 	while (data->par_line[args])
 		args++;
 	if (args >= 2)
 	{
 		if (!is_string_digit(data->par_line[1]))
 		{
-			printf ("minishell: exit: %s: numeric argument required\n", data->par_line[1]);
-			exit(2);
+			printf("minishell: exit: %s: numeric argument required\n", data->par_line[1]);
+			ret = 2;
 		}
 		else if (args == 2)
 		{
 			printf("exit\n");
-			exit(return_exit(data->par_line[1]));
+			ret = return_exit(data->par_line[1]);
 		}
 		printf("minishell: exit: too many arguments\n");
-		exit(1);
+		ret = 1;
 	}
+	else
+		printf("exit\n");
 	free_line_info(data);
 	free_for_builtins(data);
-	printf("exit\n");
-	exit(0);
+	exit(ret);
 }
