@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:54:28 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/16 23:16:34 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:11:18 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	cmd_detector(t_data *data, char *str)
 	}
 	if (access(str, X_OK) == 0 && \
 		!is_dot_cmd(str))
-		return(2);
+		return (2);
 	return (0);
 }
 

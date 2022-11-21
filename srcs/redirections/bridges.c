@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:20:36 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/18 20:58:54 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:40:10 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ int	bridge_infiles(t_data *data, int index)
 
 	i = -1;
 	ret = 0;
+	count = -1;
+	printf("canoa?\n");
 	while (++count <= index)
 	{
-		while (data->par_line[++i])
+		while (data->par_line[++i] != NULL)
 		{
-			if (count == index)
-				ret = bridging_infiles(data, i);
+			ret = bridging_infiles(data, index, count, i);
 			if (ret == -2)
 				break ;
 			else if (ret == -1)
@@ -35,16 +36,17 @@ int	bridge_infiles(t_data *data, int index)
 	return (1);
 }
 
-int	bridging_infiles(t_data *data, int i)
+int	bridging_infiles(t_data *data, int index, int count, int i)
 {
 	int	ret;
 
 	ret = redir_detector (data, data->par_line[i]);
 	if (ret == 1)
 		return (-2);
-	if (ret > 1)
+	if (ret > 1 && count == index)
 	{
-		if (ret < 3 && i != data->redir.last)
+		printf("ret %d\n", ret);
+		if (ret == 2 && i != data->redir.last)
 		{
 			if (open(data->par_line[i + 1], O_RDONLY) < 0)
 			{
@@ -52,6 +54,11 @@ int	bridging_infiles(t_data *data, int i)
 				return (-1);
 			}
 			printf("bridged : %s\n",data->par_line[i + 1]);
+		}
+		else if (ret == 3 && i != data->redir.last)
+		{
+			extract_hdockey(data, i + 1);
+			heredoc(data, index);
 		}
 	}
 	return (1);

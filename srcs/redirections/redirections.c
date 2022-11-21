@@ -42,21 +42,12 @@ int	redirect_output(t_data *data, int index)
 	int	ret;
 
 	i = find_i_for_outfile(data, index);
-	printf("outfile: %s\n", data->par_line[i]);
 	ret = redir_detector (data, data->par_line[i]);
 	if (bridge_outfiles(data, index) < 0)
 		return (-1);
 	extract_output(data, index, i + 1);
-	if (ret == 4)
-	{
-		if (exec_out_redirect(data, index, 4) < 0)
-			return (-1);
-	}
-	else
-	{
-		if (exec_out_redirect(data, index, 5) < 0)
-			return (-1);
-	}
+	if (exec_out_redirect(data, index, ret) < 0)
+		return (-1);
 	return (i);
 }
 

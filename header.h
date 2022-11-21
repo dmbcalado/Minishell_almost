@@ -6,13 +6,13 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 00:03:02 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/18 20:58:43 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:36:40 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
-
+# define BUFFER_SIZE 42
 // Libraries in the header below
 
 # include "libft/libft.h"
@@ -242,7 +242,7 @@ void	extract_input(t_data *data, int index, int i);
 void	extract_output(t_data *data, int index, int i);
 int		bridge_infiles(t_data *data, int index);
 int		bridge_outfiles(t_data *data, int index);
-int		bridging_infiles(t_data *data, int i);
+int		bridging_infiles(t_data *data, int index, int count, int i);
 int		bridging_outfiles(t_data *data, int i);
 
 // heredoc

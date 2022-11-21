@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ratinhosujo <ratinhosujo@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 18:35:12 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/15 14:18:57 by ratinhosujo      ###   ########.fr       */
+/*   Updated: 2022/11/21 16:31:54 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	exec_builtin(t_data *data, int index, int i)
 	jndex = builtin_detector(data, data->par_line[i]);
 	if (jndex < 6 && jndex >= 0)
 	{
-		data->redir.r_counter++;
 		data->ids.id[index] = fork();
 		if (data->ids.id[index] == 0)
 		{
@@ -42,6 +41,7 @@ void	exec_builtin(t_data *data, int index, int i)
 			free_for_builtins(data);
 			exit(g_exit);
 		}
+		data->redir.r_counter++;
 	}
 	else if (jndex == 6)
 		run_minishell(data, index);

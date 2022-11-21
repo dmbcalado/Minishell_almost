@@ -1,8 +1,10 @@
-Falta:
+Ja tudo fulciona.
+Alguns exemplos de pipes entre comandos e builtins com redirecoes
+entre pipes em que obtemos exatamente o resultado esperado.
 
 ls | echo bolas | wc > outfile.txt >> outfile.txt | grep h < infile.txt
 
-ls | wc > outfile.txt >> outfile.txt < infile.txt
+wc < infile.txt << eof < infile.txt > output2.txt | wc > output.txt < infile2.txt
 
 true paths -> com mais argumentos ainda falha
 

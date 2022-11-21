@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ratinhosujo <ratinhosujo@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 06:49:28 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/17 05:18:30 by ratinhosujo      ###   ########.fr       */
+/*   Updated: 2022/11/21 16:32:21 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	brain(t_data *data)
 		return ;
 	while (data->par_line[++i])
 	{
-		printf("cmd nbr %d\n", data->cmd.cmd_nbr);
-		printf("bui nbr %d\n", data->built.builtin_n);
 		if (builtin_detector (data, data->par_line[i]) >= 0)
 		{
 			parse_builtin(data, i, data->built.b_counter);

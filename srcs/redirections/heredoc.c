@@ -18,13 +18,12 @@ void	heredoc(t_data *data, int index)
 	char	*buffer;
 
 	data->ids.inp_list[index] = open(".heredoc_tmp", O_CREAT | O_TRUNC | O_RDWR, 0644);
-	if( data->ids.inp_list[index] < 2)
+	if (data->ids.inp_list[index] < 2)
 	{
 		printf("something is going terribly wrong.\n");
 		return ;
 	}
 	len = len_str(data->redir.hdoc_key);
-	printf("len : %d\n", len);
 	while (1)
 	{
 		write(1, "> ", 2);
