@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:20:36 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/21 19:47:46 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/21 20:07:55 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ int	bridge_outfiles(t_data *data, int index)
 	int	count;
 
 	i = -1;
+	ret = 0;
 	count = -1;
 	while (++count <= index)
 	{
 		while (data->par_line[++i])
 		{
-			if (count == index)
-				ret = bridging_outfiles(data, i);
+			ret = bridging_outfiles(data, index, count, i);
 			if (ret == 0)
 				break ;
 			else if (ret == -1)
@@ -85,7 +85,7 @@ int	bridge_outfiles(t_data *data, int index)
 	return (1);
 }
 
-int	bridging_outfiles(t_data *data, int i)
+int	bridging_outfiles(t_data *data, int index, int count, int i)
 {
 	int	ret;
 
@@ -94,7 +94,7 @@ int	bridging_outfiles(t_data *data, int i)
 		ret = redir_detector (data, data->par_line[i]);
 		if (ret == 1)
 			return (0);
-		if (ret > 1)
+		if (ret > 1 && count == index)
 		{
 			if (ret > 3 && i != data->redir.last)
 			{

@@ -8,6 +8,11 @@ wc < infile.txt << eof < infile.txt > output2.txt | wc > output.txt < infile2.tx
 
 Falta :
 
+o bridge dos outfiles precisa ainda de um toque afinal
+
+ls | echo bolas | wc > outfile.txt >> outfile2.txt | grep h < infile.txt
+
+nao fez bridge :c
 true paths -> com mais argumentos ainda falha
 
 command not found -> aprefeicoar
