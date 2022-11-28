@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 00:03:02 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/21 20:05:46 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/28 16:30:58 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_built
 
 typedef struct s_redir
 {
+	int		hdoc_id;
 	int		last;
 	int		r_counter;
 	int		input_n;
@@ -170,6 +171,7 @@ int		true_path_join(t_data *data, int index, int i);
 
 //COMMANDS
 //parsing and testing if its executable
+void	command_not_found(t_data *data);
 void	parse_cmds(t_data *data);
 void	parse_cmd(t_data *data, int index);
 int		acessing_cmd(t_data *data, int index, int i);

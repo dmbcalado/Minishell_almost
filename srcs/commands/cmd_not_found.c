@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   cmd_not_found.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/25 16:51:01 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/28 16:33:35 by dmendonc         ###   ########.fr       */
+/*   Created: 2022/11/23 17:26:55 by dmendonc          #+#    #+#             */
+/*   Updated: 2022/11/23 18:26:23 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../header.h"
 
-size_t	ft_strlen(const char *str)
+void	command_not_found(t_data *data)
 {
-	size_t	cont;
+	int	i;
+	int	len;
 
-	cont = 0;
-	while (str[cont])
+	i = -1;
+	while (data->par_line[++i] != NULL)
 	{
-		cont++;
+		if (redir_detector(data, data->par_line[i]) == 0)
+		{
+			len = ft_strlen(data->par_line[i]);
+			write(2, data->par_line[i], len);
+			write(2, ": command not found\n", 19);
+			break ;
+		}
+		else if (data->par_line[i + 2])
+			i++;
 	}
-	return (cont);
 }
-
-/*int	main(void)
-{
-	char	a[] = "aasadaswwdwdwdqwa";
-	char	*ptr;
-	int		contador;
-
-	ptr = a;
-	contador = ft_strlen(ptr);
-	printf("%d\n", contador);
-}*/

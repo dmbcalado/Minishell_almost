@@ -6,7 +6,7 @@
 #    By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 20:21:37 by anfreire          #+#    #+#              #
-#    Updated: 2022/11/18 19:27:49 by dmendonc         ###   ########.fr        #
+#    Updated: 2022/11/28 15:50:21 by dmendonc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,21 +38,24 @@ $(NAME)	:	$(OBJS)
 		@echo  "     +#+       +#+     +#+     +#+  +#+#+#     +#+           +#+ +#+    +#+ +#+        +#+        +#+     "
 		@echo  "    #+#       #+#     #+#     #+#   #+#+#     #+#    #+#    #+# #+#    #+# #+#        #+#        #+#      "
 		@echo  "   ###       ### ########### ###    #### ########### ########  ###    ### ########## ########## ##########"
-		@echo  ""
-		@echo  "\e[32mVersion : 0.0.1"
-		@echo  ""
-		@echo  "\e[0mThis replication of the bash shell runs commands, redirections and has some builtin commands."
-		@echo  "You're able to fully check the objectives on this project by checking the file subject.pdf."
-		@echo  "So we hope you enjoy going through this software half as much as we enjoyed making it for you,"
+		@echo  " "
+		@echo  "\e[32mVersion : 1.0.1"
+		@echo  " "
+		@echo  "\e[36mThis program replicates the behavior of the bash shell. runs commands, redirections and has some builtin commands."
+		@echo  "Runs commands that already exist in the operating system (some we built too), by using parallel processing (forks)"
+		@echo  "and the redirections run exactly like in the bash hierarchy. You're able to fully check the objectives on this project "
+		@echo  "by checking the file subject.pdf."
+		@echo  " "
+		@echo  "\e[33mSo we hope you enjoy going through this shell half as much as we enjoyed making it for you,"
 		@echo  "because we had a ball."
-		@echo  ""
-		@echo  "\e[34mnow run ./minishell and welcome!"
-		@echo  ""
+		@echo  " "
+		@echo  "\e[32mnow run ./minishell and welcome!"
+		@echo  " "
 		@echo  "\e[0mWork made by:"
 		@echo  "Diogo MBM Calado and Andre Freire, from 42 Lisbon."
-		@echo  ""
-		@echo  ""
-		@echo  ""
+		@echo  " "
+		@echo  " "
+		@echo  " "
 		
 %.o	:	%.c
 	@gcc $(CFLAGS) -c $^ -I./ -o $@

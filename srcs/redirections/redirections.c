@@ -64,7 +64,7 @@ int	redirect(t_data *data)
 	flag_i = 0;
 	flag_o = 0;
 	size = data->cmd.cmd_nbr + data->built.builtin_n;
-	while (++index < size)
+	while (++index <= size)
 	{
 		while (data->par_line[i])
 		{

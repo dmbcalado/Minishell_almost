@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:20:36 by dmendonc          #+#    #+#             */
-/*   Updated: 2022/11/21 20:07:55 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:16:34 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,16 @@ int	bridging_outfiles(t_data *data, int index, int count, int i)
 			return (0);
 		if (ret > 1 && count == index)
 		{
-			if (ret > 3 && i != data->redir.last)
+			if (ret == 4 && i != data->redir.last)
 			{
 				if (open(data->par_line[i + 1], O_CREAT | O_RDWR \
 				| O_TRUNC, 777) < 0)
+					return (-1);
+			}
+			if (ret == 5 && i != data->redir.last)
+			{
+				if (open(data->par_line[i + 1], O_CREAT | O_RDWR \
+				| O_APPEND, 777) < 0)
 					return (-1);
 			}
 		}

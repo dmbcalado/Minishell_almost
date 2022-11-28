@@ -6,7 +6,7 @@
 /*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 06:49:28 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/21 19:48:58 by dmendonc         ###   ########.fr       */
+/*   Updated: 2022/11/28 16:32:05 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ int	walk_till_executable(t_data *data, int i)
 		}
 	}
 	if (flag > 1)
-	{
-		write(2, "command not found\n", 18);
-		return (-2);
-	}
+		command_not_found(data);
 	if (i == len)
 		return (-1);
 	return (i - 1);
@@ -108,6 +105,7 @@ void	starting_vars(t_data *data)
 	data->built.b_counter = 0;
 	data->redir.r_counter = 0;
 	data->redir.father_flag = 0;
+	data->redir.hdoc_id = 0;
 }
 
 int	main(int argc, char *argv[], char *envp[])

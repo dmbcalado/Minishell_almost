@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfreire <anfreire@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dmendonc <dmendonc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 20:36:36 by anfreire          #+#    #+#             */
-/*   Updated: 2022/11/15 13:00:06 by anfreire         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:13:48 by dmendonc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	b_echo(t_data *data, int index)
 	{
 		data->andre.flag = 1;
 		data->andre.args = 0;
-		data->andre.c_dbl_ptr = parse_line(data);
+		parse_line(data);
 	}
 	else
 	{

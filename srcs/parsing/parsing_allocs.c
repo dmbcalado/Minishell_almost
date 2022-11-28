@@ -77,8 +77,6 @@ void	parse_alloc(t_data *data)
 {
 	create_lists(data);
 	count_line(data);
-	if (data->built.builtin_n + data->cmd.cmd_nbr == 0)
-		write(2, "command not found\n", 18);
 	alloc_cmds(data);
 	alloc_redirections(data);
 	if (data->built.builtin_n > 0)
@@ -118,11 +116,18 @@ void	alloc_redirections(t_data *data)
 	int	size;
 
 	size = data->cmd.cmd_nbr + data->built.builtin_n;
+	printf("size %d\n", size);
+	if (size == 0)
+	{
+		data->ids.inp_list = (int *)malloc(sizeof(int));
+		data->ids.outp_list = (int *)malloc(sizeof(int));
+	}
+	else
+		data->ids.inp_list = (int *)malloc(size * sizeof(int));
 	data->ids.id = (int *)malloc(size * sizeof(int));
 	data->ids.pfd = (int **)malloc((size + 1) * sizeof(int *));
 	data->redir.input = (char **)malloc((size + 1) * sizeof(char *));
 	data->redir.output = (char **)malloc((size + 1) * sizeof(char *));
-	data->ids.inp_list = (int *)malloc(size * sizeof(int));
 	data->ids.outp_list = (int *)malloc(size * sizeof(int));
 	data->redir.input[size] = NULL;
 	data->redir.output[size] = NULL;
